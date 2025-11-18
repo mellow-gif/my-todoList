@@ -3,27 +3,37 @@ import {useState} from "react";
 import * as React from "react";
 
 interface todoInputProps {
-    addTodoItem: (todoItem:todoItemProps) => void
+    addTodoItem: (todoItem: todoItemProps) => void
 }
 
-const TodoInput = ({addTodoItem}:todoInputProps) => {
+const TodoInput = ({addTodoItem}: todoInputProps) => {
 
-    const [text,setText] = useState("")
-    const changeValue = (e:React.ChangeEvent) => {
-        setText((e.target as HTMLInputElement).value)
+    const [title, setTitle] = useState("")
+    const changeValue = (e: React.ChangeEvent) => {
+        setTitle((e.target as HTMLInputElement).value)
     }
-    const addHandleInput = () =>{
+    const addHandleInput = (e: React.FormEvent) => {
+        e.preventDefault();
         addTodoItem({
-            id:new Date().getTime(),
-            text:text,
-            isFinished:false
+            id: new Date().getTime(),
+            title: title,
+            isFinished: false,
         })
     }
 
+
     return (
-        <div>
-            <input placeholder={"输入事项"} onChange={changeValue} value={text}></input>
-            <button onClick={addHandleInput}>添加</button>
+        <div style={{width: "100%"}}>
+            <form onSubmit={addHandleInput} style={{padding: '0px'}}>
+                <input placeholder={"Title"} onChange={changeValue} value={title} style={{
+                    width: "100%",
+                    height: "40px",
+                    margin: "10px",
+                    borderRadius: "10px",
+                    backgroundColor: "white",
+                    border: "0.5px solid gray"
+                }}></input>
+            </form>
         </div>
     )
 }
