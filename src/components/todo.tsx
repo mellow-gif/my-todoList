@@ -7,6 +7,7 @@ export interface todoItemProps {
     title: string,
     category: string,
     description: string,
+    date: string,
     isFinished: boolean,
 }
 

@@ -9,8 +9,9 @@ interface todoInputProps {
 const TodoInput = ({addTodoItem}: todoInputProps) => {
 
     const [title, setTitle] = useState("")
-    const [category, setCategory] = useState("")
+    const [category, setCategory] = useState("1")
     const [description, setDescription] = useState("")
+    const [date, setDate] = useState("2000-1-1")
     const changeValue = (e: React.ChangeEvent) => {
         setTitle((e.target as HTMLInputElement).value)
     }
@@ -20,6 +21,9 @@ const TodoInput = ({addTodoItem}: todoInputProps) => {
     const changeDescription = (e: React.ChangeEvent) => {
         setDescription((e.target as HTMLTextAreaElement).value)
     }
+    const changeDate = (e: React.ChangeEvent) => {
+        setDate((e.target as HTMLInputElement).value)
+    }
     const addHandleInput = (e: React.FormEvent) => {
         e.preventDefault();
         addTodoItem({
@@ -27,6 +31,7 @@ const TodoInput = ({addTodoItem}: todoInputProps) => {
             title: title,
             category: category,
             description: description,
+            date: date,
             isFinished: false,
         })
     }
@@ -42,6 +47,7 @@ const TodoInput = ({addTodoItem}: todoInputProps) => {
                     border: "0.5px solid gray"
                 }}></input>
                 <select
+                    value={category}
                     onChange={changeCategory}
                     style={{
                     width: "100%",
@@ -64,6 +70,16 @@ const TodoInput = ({addTodoItem}: todoInputProps) => {
                     backgroundColor: "white",
                     border: "0.5px solid gray"
                 }}></textarea>
+                <label style={{marginLeft: "10px", marginTop: "10px"}}>Due Date: </label>
+                <input type={"date"} style={ {marginLeft: "10px", marginBottom: "10px"}} onChange={changeDate} value={date}/>
+                <button type={"submit"} style={{
+                    width: "100%",
+                    height: "40px",
+                    margin: "10px",
+                    borderRadius: "10px",
+                    backgroundColor: "white",
+                    border: "0.5px solid gray"
+                }}>Add</button>
             </form>
         </div>
     )

@@ -9,17 +9,22 @@ interface todoListProps {
 }
 
 const TodoList = ({todoList, changeTodoItem, deleteTodoItem}: todoListProps) => {
-    const WorkItems = todoList.filter(item => item.category === "1").map(todoItem => {
+    const todoListSorted = [...todoList].sort((a, b) => {
+        // 转换为时间戳（毫秒数），直接相减比较
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+    });
+
+    const WorkItems = todoListSorted.filter(item => item.category === "1").map(todoItem => {
         return <TodoItem key={todoItem.id} item={todoItem}
                          changeTodoItem={changeTodoItem}
                          deleteTodoItem={deleteTodoItem}></TodoItem>
     })
-    const StudyItems = todoList.filter(item => item.category === "2").map(todoItem => {
+    const StudyItems = todoListSorted.filter(item => item.category === "2").map(todoItem => {
         return <TodoItem key={todoItem.id} item={todoItem}
                          changeTodoItem={changeTodoItem}
                          deleteTodoItem={deleteTodoItem}></TodoItem>
     })
-    const LifeItems = todoList.filter(item => item.category === "3").map(todoItem => {
+    const LifeItems = todoListSorted.filter(item => item.category === "3").map(todoItem => {
         return <TodoItem key={todoItem.id} item={todoItem}
                          changeTodoItem={changeTodoItem}
                          deleteTodoItem={deleteTodoItem}></TodoItem>

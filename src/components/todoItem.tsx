@@ -26,6 +26,13 @@ const TodoItem = ({item, changeTodoItem,deleteTodoItem}: itemProps) => {
                     marginLeft: "5px",
                     marginRight: "0px",
                 }}>{item.title}</span>
+                <span style={{
+                    margin: "10px",
+                    marginLeft: "5px",
+                    marginRight: "0px",
+                    textDecoration: item.isFinished ? "line-through" : "none",
+                    color: item.isFinished ? "#888" : "#000",
+                }}>{item.description}</span>
                 <button
                     onClick={deleteTodo}
                     style={{
