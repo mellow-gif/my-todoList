@@ -1,6 +1,8 @@
 import TodoInput from "./todoInput.tsx";
 import TodoList from "./todoList.tsx";
 import {useEffect, useState} from "react";
+import React from 'react';
+
 
 export interface todoItemProps {
     id: number,
@@ -27,6 +29,9 @@ const Todo = () => {
         return [];
     });
 
+    const [searchList , setSearchList] = useState<todoItemProps[]>(todoList)
+    const [isSearching , setIsSearching] = useState(false)
+
     const num = todoList.length
     const changeTodoItem = (id: number) => {
         const newTodoList = todoList.map(item => {
@@ -49,19 +54,34 @@ const Todo = () => {
         setTodoList(newTodoList)
     }
 
+    const searchTodoItem = (e: React.ChangeEvent) => {
+        const title = (e.target as HTMLInputElement).value
+        if(title === ""){
+            setIsSearching(false)
+        }
+        else{
+            setIsSearching(true)
+            const newTodoList = todoList.filter(item => item.title.includes(title))
+            setSearchList(newTodoList)
+        }
+    }
 
-    useEffect( ()=>{
+    useEffect(() => {
         localStorage.setItem("todoList", JSON.stringify(todoList))
     }, [todoList])
 
     return (
         <div style={{width: "50%"}}>
-            <div style={{marginLeft: "20px",marginBottom: "10px"}}>
+            <div style={{marginLeft: "20px", marginBottom: "10px"}}>
                 <h1 style={{margin: "0px", padding: "0px"}}>Todos</h1>
                 <h6 style={{margin: "0px", padding: "0px", color: "gray"}}>{num} items left</h6>
             </div>
             <TodoInput addTodoItem={addTodoItem}></TodoInput>
-            <TodoList todoList={todoList} changeTodoItem={changeTodoItem} deleteTodoItem={deleteTodoItem}></TodoList>
+            <div style={{marginLeft: "10px", marginBottom: "10px"}}>
+                <input type="text" placeholder="Search" style={{width: "100%",height: "30px"}}
+                       onChange={searchTodoItem} />
+            </div>
+            <TodoList todoList= {isSearching ? searchList : todoList} changeTodoItem={changeTodoItem} deleteTodoItem={deleteTodoItem}></TodoList>
         </div>
     )
 }
