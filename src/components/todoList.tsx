@@ -1,6 +1,6 @@
 import TodoItem from "./todoItem.tsx";
 import type {todoItemProps} from "./todo.tsx";
-import {useEffect} from "react";
+
 
 
 interface todoListProps {
@@ -31,14 +31,7 @@ const TodoList = ({todoList, changeTodoItem, deleteTodoItem}: todoListProps) => 
                          deleteTodoItem={deleteTodoItem}></TodoItem>
     })
 
-    const dueItems = todoListSorted.filter(item => !item.isFinished && new Date(item.date).getTime()
-     > new Date().getTime()
-).
-    map(todoItem => {
-        return <TodoItem key={todoItem.id} item={todoItem}
-                         changeTodoItem={changeTodoItem}
-                         deleteTodoItem={deleteTodoItem}></TodoItem>
-    })
+
 
     return (
         <div>
@@ -48,8 +41,7 @@ const TodoList = ({todoList, changeTodoItem, deleteTodoItem}: todoListProps) => 
             {StudyItems}
             <h4>Life</h4>
             {LifeItems}
-            <h4>Due</h4>
-            {dueItems}
+
         </div>
     )
 }

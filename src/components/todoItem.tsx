@@ -33,6 +33,13 @@ const TodoItem = ({item, changeTodoItem,deleteTodoItem}: itemProps) => {
                     textDecoration: item.isFinished ? "line-through" : "none",
                     color: item.isFinished ? "#888" : "#000",
                 }}>{item.description}</span>
+                <span style={{
+                    margin: "10px",
+                    marginLeft: "5px",
+                    marginRight: "0px",
+                    textDecoration: item.isFinished ? "line-through" : "none",
+                    color: item.isFinished ? "#888" : "#000",
+                }}>{item.date}</span>
                 <button
                     onClick={deleteTodo}
                     style={{
