@@ -1,5 +1,6 @@
 import TodoItem from "./todoItem.tsx";
 import type {todoItemProps} from "./todo.tsx";
+import {useEffect} from "react";
 
 
 interface todoListProps {
@@ -38,7 +39,6 @@ const TodoList = ({todoList, changeTodoItem, deleteTodoItem}: todoListProps) => 
                          changeTodoItem={changeTodoItem}
                          deleteTodoItem={deleteTodoItem}></TodoItem>
     })
-
 
     return (
         <div>
