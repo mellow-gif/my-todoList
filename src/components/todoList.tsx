@@ -8,13 +8,32 @@ interface todoListProps {
     deleteTodoItem: (id: number) => void
 }
 
-const TodoList = (props: todoListProps) => {
-    const TodoItems = props.todoList.map(todoItem => <TodoItem key={todoItem.id} item={todoItem}
-                                                               changeTodoItem={props.changeTodoItem}
-                                                               deleteTodoItem={props.deleteTodoItem}></TodoItem>)
+const TodoList = ({todoList, changeTodoItem, deleteTodoItem}: todoListProps) => {
+    const WorkItems = todoList.filter(item => item.category === "1").map(todoItem => {
+        return <TodoItem key={todoItem.id} item={todoItem}
+                         changeTodoItem={changeTodoItem}
+                         deleteTodoItem={deleteTodoItem}></TodoItem>
+    })
+    const StudyItems = todoList.filter(item => item.category === "2").map(todoItem => {
+        return <TodoItem key={todoItem.id} item={todoItem}
+                         changeTodoItem={changeTodoItem}
+                         deleteTodoItem={deleteTodoItem}></TodoItem>
+    })
+    const LifeItems = todoList.filter(item => item.category === "3").map(todoItem => {
+        return <TodoItem key={todoItem.id} item={todoItem}
+                         changeTodoItem={changeTodoItem}
+                         deleteTodoItem={deleteTodoItem}></TodoItem>
+    })
+
+
     return (
         <div>
-            {TodoItems}
+            <h4>Work</h4>
+            {WorkItems}
+            <h4>Study</h4>
+            {StudyItems}
+            <h4>Life</h4>
+            {LifeItems}
         </div>
     )
 }

@@ -5,6 +5,8 @@ import {useEffect, useState} from "react";
 export interface todoItemProps {
     id: number,
     title: string,
+    category: string,
+    description: string,
     isFinished: boolean,
 }
 
